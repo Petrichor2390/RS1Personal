@@ -1,0 +1,88 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-62eb97605490ba746c1c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "sprint3",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "mapOverlayExe::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-mapOverlayExe-Debug-7b42211ee50750cacf87.json",
+					"name" : "mapOverlayExe",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "objectExcludeExe::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-objectExcludeExe-Debug-8cfc58a762b47658f7cb.json",
+					"name" : "objectExcludeExe",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "sprint3_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-sprint3_uninstall-Debug-bb46996bf80e8d873e73.json",
+					"name" : "sprint3_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-Debug-c2daab2ecfd9b796ca4f.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/charles/roboStu1_ros2_ws/src/sprint3/build",
+		"source" : "/home/charles/roboStu1_ros2_ws/src/sprint3"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}
