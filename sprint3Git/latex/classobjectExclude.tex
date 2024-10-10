@@ -1,0 +1,417 @@
+\hypertarget{classobjectExclude}{}\doxysection{object\+Exclude Class Reference}
+\label{classobjectExclude}\index{objectExclude@{objectExclude}}
+
+
+subsribes to odometry and laser scan to find if there is a cylinder around the robot. when it finds a cylinder it displays an image of the generated map with a cylinder overlaid  
+
+
+
+
+Inheritance diagram for object\+Exclude\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=165pt]{classobjectExclude__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for object\+Exclude\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=165pt]{classobjectExclude__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classobjectExclude_ae86b5b8db3849aa1e1a6d09544649666}{object\+Exclude}} ()
+\begin{DoxyCompactList}\small\item\em Constructor for the node, imports required files and initialises variables to starting values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classobjectExclude_a1532c251b29de4d7b1ab6cbfdce12aa2}{scan\+\_\+callback}} (const sensor\+\_\+msgs\+::msg\+::\+Laser\+Scan\+::\+Shared\+Ptr msg)
+\begin{DoxyCompactList}\small\item\em callback for the /scan topic recieves the laser scan data from gazebo and processes it into segments (vectors of clustered points in global frame) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classobjectExclude_a13029984f53113c21eab11a1cfcff674}{odom\+\_\+callback}} (const nav\+\_\+msgs\+::msg\+::\+Odometry\+::\+Shared\+Ptr msg)
+\begin{DoxyCompactList}\small\item\em callback for the /odom topic used as ground truth for locating the global positioning of the cylinder \end{DoxyCompactList}\item 
+std\+::vector$<$ geometry\+\_\+msgs\+::msg\+::\+Point $>$ \mbox{\hyperlink{classobjectExclude_a8ba9b82a2bcbcd0025f5c77e143066c7}{generate\+Circle\+Points}} (geometry\+\_\+msgs\+::msg\+::\+Point center, double radius, int num\+\_\+points)
+\begin{DoxyCompactList}\small\item\em generate a set of points in a circle around a given point \end{DoxyCompactList}\item 
+std\+::vector$<$ geometry\+\_\+msgs\+::msg\+::\+Point $>$ \mbox{\hyperlink{classobjectExclude_afe81682d45829cb7f304c16d6f2191e3}{generate\+Points\+Along\+Line}} (double Xpos, double Ypos, double yaw, int num\+\_\+points)
+\begin{DoxyCompactList}\small\item\em generates a set of points along a line from the given position to the max range of the laser scanner data received previously \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classobjectExclude_af112b5e3e4d1e2f59a541568ffeaf2b5}{distance\+Between\+Points}} (geometry\+\_\+msgs\+::msg\+::\+Point p1, geometry\+\_\+msgs\+::msg\+::\+Point p2)
+\begin{DoxyCompactList}\small\item\em calculates the euclidean distance between 2 points \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classobjectExclude_ab9e4bee72e96931a0a73cb3abd2abb5d}{number\+Of\+Nearby\+Points}} (geometry\+\_\+msgs\+::msg\+::\+Point p, std\+::vector$<$ geometry\+\_\+msgs\+::msg\+::\+Point $>$ p\+Set, double radius)
+\begin{DoxyCompactList}\small\item\em calculates the number of points in a given set of points that are within a given range of a given point \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classobjectExclude_a95fb4493a90e47bdda394d91d3ddc8d0}{print\+Points}} (std\+::vector$<$ geometry\+\_\+msgs\+::msg\+::\+Point $>$ p\+Set)
+\begin{DoxyCompactList}\small\item\em prints x and y position of points to terminal \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classobjectExclude_a6d6414804d592cc1205c4639f961eb43}{yawof\+Segment}} (std\+::vector$<$ geometry\+\_\+msgs\+::msg\+::\+Point $>$ segment)
+\begin{DoxyCompactList}\small\item\em finds the global yaw of the median point of a set of points (segment) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classobjectExclude_ac0a455d25cb125b210d787518acf94b3}{exclude\+Segment}} (std\+::vector$<$ geometry\+\_\+msgs\+::msg\+::\+Point $>$ segment)
+\begin{DoxyCompactList}\small\item\em calculates if a given segment should be ignored as a possible cylinder based on if the average position of the segment is too far away from the robot \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classobjectExclude_ac26f0548e13f00b8854dd7581526bc4c}{find\+Cylinder}} ()
+\begin{DoxyCompactList}\small\item\em calculates based on privately stored data if there is a cylinder within the range of the robot \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classobjectExclude_aae363316afd8f04068b1c91ab167b9d9}{generate\+Image}} ()
+\begin{DoxyCompactList}\small\item\em generates a cv\+::mat image with the cylinder overlayed at the correct position over the generated map of the environment \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classobjectExclude_a0f9ac8beee7dfefbaea19f5522cb458d}{contains\+\_\+nan}} (const geometry\+\_\+msgs\+::msg\+::\+Point \&point)
+\begin{DoxyCompactList}\small\item\em Predicate function used to remove nan values from vector of geometry points. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+rclcpp\+::\+Subscription$<$ sensor\+\_\+msgs\+::msg\+::\+Laser\+Scan $>$\+::Shared\+Ptr \mbox{\hyperlink{classobjectExclude_a64f3da57857dff247ba6b5edc798058c}{laser\+Sub\+\_\+}}
+\begin{DoxyCompactList}\small\item\em laserscan subscription variable \end{DoxyCompactList}\item 
+rclcpp\+::\+Subscription$<$ nav\+\_\+msgs\+::msg\+::\+Odometry $>$\+::Shared\+Ptr \mbox{\hyperlink{classobjectExclude_ac06f147c88e9f12ba45e1edcab3e6658}{odom\+Sub\+\_\+}}
+\begin{DoxyCompactList}\small\item\em odometry subscription variable \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classobjectExclude_a141e3c1f92a626545cc019a213b8a874}{Xpos\+GT\+\_\+}}
+\begin{DoxyCompactList}\small\item\em ground truth x position of robot \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classobjectExclude_acc387e7964f9f3743578addb52d9b11d}{Ypos\+GT\+\_\+}}
+\begin{DoxyCompactList}\small\item\em ground truth y position of robot \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classobjectExclude_a604a5e436a626919c5120c48dd7bf26a}{yaw\+GT\+\_\+}}
+\begin{DoxyCompactList}\small\item\em ground truth yaw of robot \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classobjectExclude_a429339aca6251022f237bf391f8561a9}{scan\+Range\+\_\+}}
+\begin{DoxyCompactList}\small\item\em laser scanner max range \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classobjectExclude_ad194f3b48712b40ce7fcbbb284eeb543}{cylinder\+X\+\_\+}}
+\begin{DoxyCompactList}\small\item\em cylinder global x position \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classobjectExclude_a9b9731235ea2c2b20da67e8d518ba763}{cylinder\+Y\+\_\+}}
+\begin{DoxyCompactList}\small\item\em cylinder global y position \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classobjectExclude_a3be19509311fc1b9f267e061db126dbc}{cylinder\+Found\+\_\+}}
+\begin{DoxyCompactList}\small\item\em ture for if a cylinder has already been found \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ geometry\+\_\+msgs\+::msg\+::\+Point $>$ $>$ \mbox{\hyperlink{classobjectExclude_ab66f7730c2a0bac4c402f3aa63c8bb19}{segments\+\_\+}}
+\begin{DoxyCompactList}\small\item\em grouping of points in to clusters of close points for processing \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+subsribes to odometry and laser scan to find if there is a cylinder around the robot. when it finds a cylinder it displays an image of the generated map with a cylinder overlaid 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classobjectExclude_ae86b5b8db3849aa1e1a6d09544649666}\label{classobjectExclude_ae86b5b8db3849aa1e1a6d09544649666}} 
+\index{objectExclude@{objectExclude}!objectExclude@{objectExclude}}
+\index{objectExclude@{objectExclude}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{objectExclude()}{objectExclude()}}
+{\footnotesize\ttfamily object\+Exclude\+::object\+Exclude (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for the node, imports required files and initialises variables to starting values. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classobjectExclude_a0f9ac8beee7dfefbaea19f5522cb458d}\label{classobjectExclude_a0f9ac8beee7dfefbaea19f5522cb458d}} 
+\index{objectExclude@{objectExclude}!contains\_nan@{contains\_nan}}
+\index{contains\_nan@{contains\_nan}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{contains\_nan()}{contains\_nan()}}
+{\footnotesize\ttfamily static bool object\+Exclude\+::contains\+\_\+nan (\begin{DoxyParamCaption}\item[{const geometry\+\_\+msgs\+::msg\+::\+Point \&}]{point }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Predicate function used to remove nan values from vector of geometry points. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & point to be considered \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false if either x or y is nan, otherwise true 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classobjectExclude_af112b5e3e4d1e2f59a541568ffeaf2b5}\label{classobjectExclude_af112b5e3e4d1e2f59a541568ffeaf2b5}} 
+\index{objectExclude@{objectExclude}!distanceBetweenPoints@{distanceBetweenPoints}}
+\index{distanceBetweenPoints@{distanceBetweenPoints}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{distanceBetweenPoints()}{distanceBetweenPoints()}}
+{\footnotesize\ttfamily double object\+Exclude\+::distance\+Between\+Points (\begin{DoxyParamCaption}\item[{geometry\+\_\+msgs\+::msg\+::\+Point}]{p1,  }\item[{geometry\+\_\+msgs\+::msg\+::\+Point}]{p2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+calculates the euclidean distance between 2 points 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p1} & point 1 to be considered \\
+\hline
+{\em p2} & point 2 to be considered \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+distance 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classobjectExclude_ac0a455d25cb125b210d787518acf94b3}\label{classobjectExclude_ac0a455d25cb125b210d787518acf94b3}} 
+\index{objectExclude@{objectExclude}!excludeSegment@{excludeSegment}}
+\index{excludeSegment@{excludeSegment}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{excludeSegment()}{excludeSegment()}}
+{\footnotesize\ttfamily bool object\+Exclude\+::exclude\+Segment (\begin{DoxyParamCaption}\item[{std\+::vector$<$ geometry\+\_\+msgs\+::msg\+::\+Point $>$}]{segment }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+calculates if a given segment should be ignored as a possible cylinder based on if the average position of the segment is too far away from the robot 
+
+
+\begin{DoxyParams}{Parameters}
+{\em segment} & the segment to ignored or not \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true for exclude false for include 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classobjectExclude_ac26f0548e13f00b8854dd7581526bc4c}\label{classobjectExclude_ac26f0548e13f00b8854dd7581526bc4c}} 
+\index{objectExclude@{objectExclude}!findCylinder@{findCylinder}}
+\index{findCylinder@{findCylinder}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{findCylinder()}{findCylinder()}}
+{\footnotesize\ttfamily void object\+Exclude\+::find\+Cylinder (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+calculates based on privately stored data if there is a cylinder within the range of the robot 
+
+\mbox{\Hypertarget{classobjectExclude_a8ba9b82a2bcbcd0025f5c77e143066c7}\label{classobjectExclude_a8ba9b82a2bcbcd0025f5c77e143066c7}} 
+\index{objectExclude@{objectExclude}!generateCirclePoints@{generateCirclePoints}}
+\index{generateCirclePoints@{generateCirclePoints}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{generateCirclePoints()}{generateCirclePoints()}}
+{\footnotesize\ttfamily std\+::vector$<$geometry\+\_\+msgs\+::msg\+::\+Point$>$ object\+Exclude\+::generate\+Circle\+Points (\begin{DoxyParamCaption}\item[{geometry\+\_\+msgs\+::msg\+::\+Point}]{center,  }\item[{double}]{radius,  }\item[{int}]{num\+\_\+points }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+generate a set of points in a circle around a given point 
+
+
+\begin{DoxyParams}{Parameters}
+{\em center} & the center of the circle of points to be generated \\
+\hline
+{\em radius} & the radius of circle of points to be generated \\
+\hline
+{\em num\+\_\+points} & number of equally spaced points in the generated circle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector of points 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classobjectExclude_aae363316afd8f04068b1c91ab167b9d9}\label{classobjectExclude_aae363316afd8f04068b1c91ab167b9d9}} 
+\index{objectExclude@{objectExclude}!generateImage@{generateImage}}
+\index{generateImage@{generateImage}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{generateImage()}{generateImage()}}
+{\footnotesize\ttfamily void object\+Exclude\+::generate\+Image (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+generates a cv\+::mat image with the cylinder overlayed at the correct position over the generated map of the environment 
+
+\mbox{\Hypertarget{classobjectExclude_afe81682d45829cb7f304c16d6f2191e3}\label{classobjectExclude_afe81682d45829cb7f304c16d6f2191e3}} 
+\index{objectExclude@{objectExclude}!generatePointsAlongLine@{generatePointsAlongLine}}
+\index{generatePointsAlongLine@{generatePointsAlongLine}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{generatePointsAlongLine()}{generatePointsAlongLine()}}
+{\footnotesize\ttfamily std\+::vector$<$geometry\+\_\+msgs\+::msg\+::\+Point$>$ object\+Exclude\+::generate\+Points\+Along\+Line (\begin{DoxyParamCaption}\item[{double}]{Xpos,  }\item[{double}]{Ypos,  }\item[{double}]{yaw,  }\item[{int}]{num\+\_\+points }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+generates a set of points along a line from the given position to the max range of the laser scanner data received previously 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Xpos} & starting x position of the line \\
+\hline
+{\em Ypos} & starting y position of the line \\
+\hline
+{\em yaw} & yaw the line propagates away from the starting point at \\
+\hline
+{\em num\+\_\+points} & number of points equally spaced along the line between the start pos specified and the end of the laserscanners range \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector of points 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classobjectExclude_ab9e4bee72e96931a0a73cb3abd2abb5d}\label{classobjectExclude_ab9e4bee72e96931a0a73cb3abd2abb5d}} 
+\index{objectExclude@{objectExclude}!numberOfNearbyPoints@{numberOfNearbyPoints}}
+\index{numberOfNearbyPoints@{numberOfNearbyPoints}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{numberOfNearbyPoints()}{numberOfNearbyPoints()}}
+{\footnotesize\ttfamily int object\+Exclude\+::number\+Of\+Nearby\+Points (\begin{DoxyParamCaption}\item[{geometry\+\_\+msgs\+::msg\+::\+Point}]{p,  }\item[{std\+::vector$<$ geometry\+\_\+msgs\+::msg\+::\+Point $>$}]{p\+Set,  }\item[{double}]{radius }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+calculates the number of points in a given set of points that are within a given range of a given point 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & point around which other points are considered to in or out of range \\
+\hline
+{\em p\+Set} & set of points being counted as in or out of range of p point \\
+\hline
+{\em radius} & tolerance between p and p\+Set \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+number of points within radius distance of p within p\+Set 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classobjectExclude_a13029984f53113c21eab11a1cfcff674}\label{classobjectExclude_a13029984f53113c21eab11a1cfcff674}} 
+\index{objectExclude@{objectExclude}!odom\_callback@{odom\_callback}}
+\index{odom\_callback@{odom\_callback}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{odom\_callback()}{odom\_callback()}}
+{\footnotesize\ttfamily void object\+Exclude\+::odom\+\_\+callback (\begin{DoxyParamCaption}\item[{const nav\+\_\+msgs\+::msg\+::\+Odometry\+::\+Shared\+Ptr}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+callback for the /odom topic used as ground truth for locating the global positioning of the cylinder 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & odometry data from topic \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classobjectExclude_a95fb4493a90e47bdda394d91d3ddc8d0}\label{classobjectExclude_a95fb4493a90e47bdda394d91d3ddc8d0}} 
+\index{objectExclude@{objectExclude}!printPoints@{printPoints}}
+\index{printPoints@{printPoints}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{printPoints()}{printPoints()}}
+{\footnotesize\ttfamily void object\+Exclude\+::print\+Points (\begin{DoxyParamCaption}\item[{std\+::vector$<$ geometry\+\_\+msgs\+::msg\+::\+Point $>$}]{p\+Set }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+prints x and y position of points to terminal 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Set} & points to be printed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classobjectExclude_a1532c251b29de4d7b1ab6cbfdce12aa2}\label{classobjectExclude_a1532c251b29de4d7b1ab6cbfdce12aa2}} 
+\index{objectExclude@{objectExclude}!scan\_callback@{scan\_callback}}
+\index{scan\_callback@{scan\_callback}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{scan\_callback()}{scan\_callback()}}
+{\footnotesize\ttfamily void object\+Exclude\+::scan\+\_\+callback (\begin{DoxyParamCaption}\item[{const sensor\+\_\+msgs\+::msg\+::\+Laser\+Scan\+::\+Shared\+Ptr}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+callback for the /scan topic recieves the laser scan data from gazebo and processes it into segments (vectors of clustered points in global frame) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & laserscan data from topic \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classobjectExclude_a6d6414804d592cc1205c4639f961eb43}\label{classobjectExclude_a6d6414804d592cc1205c4639f961eb43}} 
+\index{objectExclude@{objectExclude}!yawofSegment@{yawofSegment}}
+\index{yawofSegment@{yawofSegment}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{yawofSegment()}{yawofSegment()}}
+{\footnotesize\ttfamily double object\+Exclude\+::yawof\+Segment (\begin{DoxyParamCaption}\item[{std\+::vector$<$ geometry\+\_\+msgs\+::msg\+::\+Point $>$}]{segment }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+finds the global yaw of the median point of a set of points (segment) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em segment} & set of points considered \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+global yaw 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classobjectExclude_a3be19509311fc1b9f267e061db126dbc}\label{classobjectExclude_a3be19509311fc1b9f267e061db126dbc}} 
+\index{objectExclude@{objectExclude}!cylinderFound\_@{cylinderFound\_}}
+\index{cylinderFound\_@{cylinderFound\_}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{cylinderFound\_}{cylinderFound\_}}
+{\footnotesize\ttfamily bool object\+Exclude\+::cylinder\+Found\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+ture for if a cylinder has already been found 
+
+\mbox{\Hypertarget{classobjectExclude_ad194f3b48712b40ce7fcbbb284eeb543}\label{classobjectExclude_ad194f3b48712b40ce7fcbbb284eeb543}} 
+\index{objectExclude@{objectExclude}!cylinderX\_@{cylinderX\_}}
+\index{cylinderX\_@{cylinderX\_}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{cylinderX\_}{cylinderX\_}}
+{\footnotesize\ttfamily double object\+Exclude\+::cylinder\+X\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+cylinder global x position 
+
+\mbox{\Hypertarget{classobjectExclude_a9b9731235ea2c2b20da67e8d518ba763}\label{classobjectExclude_a9b9731235ea2c2b20da67e8d518ba763}} 
+\index{objectExclude@{objectExclude}!cylinderY\_@{cylinderY\_}}
+\index{cylinderY\_@{cylinderY\_}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{cylinderY\_}{cylinderY\_}}
+{\footnotesize\ttfamily double object\+Exclude\+::cylinder\+Y\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+cylinder global y position 
+
+\mbox{\Hypertarget{classobjectExclude_a64f3da57857dff247ba6b5edc798058c}\label{classobjectExclude_a64f3da57857dff247ba6b5edc798058c}} 
+\index{objectExclude@{objectExclude}!laserSub\_@{laserSub\_}}
+\index{laserSub\_@{laserSub\_}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{laserSub\_}{laserSub\_}}
+{\footnotesize\ttfamily rclcpp\+::\+Subscription$<$sensor\+\_\+msgs\+::msg\+::\+Laser\+Scan$>$\+::Shared\+Ptr object\+Exclude\+::laser\+Sub\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+laserscan subscription variable 
+
+\mbox{\Hypertarget{classobjectExclude_ac06f147c88e9f12ba45e1edcab3e6658}\label{classobjectExclude_ac06f147c88e9f12ba45e1edcab3e6658}} 
+\index{objectExclude@{objectExclude}!odomSub\_@{odomSub\_}}
+\index{odomSub\_@{odomSub\_}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{odomSub\_}{odomSub\_}}
+{\footnotesize\ttfamily rclcpp\+::\+Subscription$<$nav\+\_\+msgs\+::msg\+::\+Odometry$>$\+::Shared\+Ptr object\+Exclude\+::odom\+Sub\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+odometry subscription variable 
+
+\mbox{\Hypertarget{classobjectExclude_a429339aca6251022f237bf391f8561a9}\label{classobjectExclude_a429339aca6251022f237bf391f8561a9}} 
+\index{objectExclude@{objectExclude}!scanRange\_@{scanRange\_}}
+\index{scanRange\_@{scanRange\_}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{scanRange\_}{scanRange\_}}
+{\footnotesize\ttfamily double object\+Exclude\+::scan\+Range\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+laser scanner max range 
+
+\mbox{\Hypertarget{classobjectExclude_ab66f7730c2a0bac4c402f3aa63c8bb19}\label{classobjectExclude_ab66f7730c2a0bac4c402f3aa63c8bb19}} 
+\index{objectExclude@{objectExclude}!segments\_@{segments\_}}
+\index{segments\_@{segments\_}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{segments\_}{segments\_}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::vector$<$geometry\+\_\+msgs\+::msg\+::\+Point$>$ $>$ object\+Exclude\+::segments\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+grouping of points in to clusters of close points for processing 
+
+\mbox{\Hypertarget{classobjectExclude_a141e3c1f92a626545cc019a213b8a874}\label{classobjectExclude_a141e3c1f92a626545cc019a213b8a874}} 
+\index{objectExclude@{objectExclude}!XposGT\_@{XposGT\_}}
+\index{XposGT\_@{XposGT\_}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{XposGT\_}{XposGT\_}}
+{\footnotesize\ttfamily double object\+Exclude\+::\+Xpos\+GT\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+ground truth x position of robot 
+
+\mbox{\Hypertarget{classobjectExclude_a604a5e436a626919c5120c48dd7bf26a}\label{classobjectExclude_a604a5e436a626919c5120c48dd7bf26a}} 
+\index{objectExclude@{objectExclude}!yawGT\_@{yawGT\_}}
+\index{yawGT\_@{yawGT\_}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{yawGT\_}{yawGT\_}}
+{\footnotesize\ttfamily double object\+Exclude\+::yaw\+GT\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+ground truth yaw of robot 
+
+\mbox{\Hypertarget{classobjectExclude_acc387e7964f9f3743578addb52d9b11d}\label{classobjectExclude_acc387e7964f9f3743578addb52d9b11d}} 
+\index{objectExclude@{objectExclude}!YposGT\_@{YposGT\_}}
+\index{YposGT\_@{YposGT\_}!objectExclude@{objectExclude}}
+\doxysubsubsection{\texorpdfstring{YposGT\_}{YposGT\_}}
+{\footnotesize\ttfamily double object\+Exclude\+::\+Ypos\+GT\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+ground truth y position of robot 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{objectExclude_8cpp}{object\+Exclude.\+cpp}}\end{DoxyCompactItemize}
